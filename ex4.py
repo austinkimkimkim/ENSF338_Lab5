@@ -61,14 +61,13 @@ class LinkedListQueue:
             returnValue = current.getData()
             self.head = None
             self.tail = None
-            return returnValue
         else:
             while current.getNext() != self.tail:
                 current = current.getNext()
             returnValue = self.tail.getData()
             current.setNext(None)
             self.tail = current
-            return returnValue
+        return returnValue
 
 #Part 4.3
         
