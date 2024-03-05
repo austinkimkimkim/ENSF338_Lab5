@@ -106,13 +106,31 @@ print(array_queue_times)
 print(linked_list_queue_times)
 
 #Part 4.5
-plt.hist(array_queue_times, bins=20, alpha=0.5, label='ArrayQueue')
-plt.hist(linked_list_queue_times, bins=20, alpha=0.5, label='LinkedListQueue')
+plt.hist(array_queue_times, bins=20, alpha=0.5, label='ArrayQueue',color='red')
+plt.hist(linked_list_queue_times, bins=20, alpha=0.5, label='LinkedListQueue', color='blue')
 plt.xlabel('Time (seconds)')
 plt.ylabel('Frequency')
 plt.title('ArrayQueue vs LinkedListQueue Operation Times')
 plt.legend(loc='upper right')
 plt.show()
 
+#The values for the array queue are barely visible on the histogram, so let's create a scatterplot as well
+plt.scatter(range(len(array_queue_times)), array_queue_times, label='ArrayQueue', color='red')
+plt.scatter(range(len(linked_list_queue_times)), linked_list_queue_times, label='LinkedListQueue', color='blue')
+plt.xlabel('Iteration')
+plt.ylabel('Time (seconds)')
+plt.title('ArrayQueue and LinkedListQueue Operation Times')
+plt.legend()
+plt.show()
+
 print("Average time for ArrayQueue:", sum(array_queue_times) / len(array_queue_times))
 print("Average time for LinkedListQueue:", sum(linked_list_queue_times) / len(linked_list_queue_times))
+
+#From the plots, we can see that the array implementation is much faster than the linked list implementation.
+# Since the linked list implementation has an O(1) enqueue complexity and O(n) dequeue complexity, but the 
+# array implementation has O(n) enqueue and O(1) dequeue, we would expect the linked list implementation
+# to be much faster since 70% of the operations are to enqueue. The likely reason for this is how complexity 
+# is not an empirical measure of the time it will take for the queue to complete. For example, even though
+# creating a new node and changing the head pointer in a linked list is O(1), it may be a more costly and 
+# time consuming operation than compared to adding the element to the beginning of an array and shifting 
+# every element over, even though this should be O(n). 
