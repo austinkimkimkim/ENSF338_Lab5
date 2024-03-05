@@ -1,3 +1,7 @@
+import random
+import timeit
+import matplotlib.pyplot as plt
+
 #Part 4.1
 
 class ArrayQueue:
@@ -42,6 +46,7 @@ class LinkedListQueue:
     def enqueue(self,item):
         new_node = Node(item)
         if self.head == None:
+            new_node.setNext(self.head)
             self.head = new_node
             self.tail = new_node
         else:
@@ -65,4 +70,50 @@ class LinkedListQueue:
             self.tail = current
             return returnValue
 
+#Part 4.3
+        
+def generate_tasks():
+    tasks = []
+    for _ in range(10000):
+        if random.random() < 0.7:
+            tasks.append(0) #enqueue
+        else:
+            tasks.append(1) #dequeue
+    return tasks
 
+#Part 4.4
+
+def measure_performance(queue_type):
+    times = []
+    for _ in range(100):
+        tasks = generate_tasks()
+        queue = queue_type()
+        total_time = timeit.timeit(lambda: execute_tasks(queue, tasks), number=1)
+        times.append(total_time)
+    return times
+
+def execute_tasks(queue, tasks):
+    for task in tasks:
+        if task == 0:
+            queue.enqueue(1) 
+        else:
+            queue.dequeue()
+
+array_queue_times = measure_performance(ArrayQueue)
+linked_list_queue_times = measure_performance(LinkedListQueue)
+
+#print the arrays of resulting times
+print(array_queue_times)
+print(linked_list_queue_times)
+
+#Part 4.5
+plt.hist(array_queue_times, bins=20, alpha=0.5, label='ArrayQueue')
+plt.hist(linked_list_queue_times, bins=20, alpha=0.5, label='LinkedListQueue')
+plt.xlabel('Time (seconds)')
+plt.ylabel('Frequency')
+plt.title('ArrayQueue vs LinkedListQueue Operation Times')
+plt.legend(loc='upper right')
+plt.show()
+
+print("Average time for ArrayQueue:", sum(array_queue_times) / len(array_queue_times))
+print("Average time for LinkedListQueue:", sum(linked_list_queue_times) / len(linked_list_queue_times))
