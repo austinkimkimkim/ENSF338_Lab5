@@ -29,6 +29,7 @@ def main():
       new_node = Node(element)
       if self.head == None:
         self.head = new_node
+        new_node.next = None
         return
       else:
         new_node.next = self.head
