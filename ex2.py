@@ -91,14 +91,6 @@ class AnotherPriorityQueue:
     def __str__(self):
         return str(self.queue)
     
-def generate_random_task_list(length):
-    tasks = []
-    for _ in range(length):
-        # Generate a random task based on probabilities
-        task = random.choices(['enqueue', 'dequeue'], weights=[0.7, 0.3])[0]
-        tasks.append(task)
-    return tasks
-
 def generate_random_task_list():
     tasks = []
     for _ in range(1000):
