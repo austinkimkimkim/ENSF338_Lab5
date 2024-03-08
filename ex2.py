@@ -100,28 +100,30 @@ def generate_random_task_list():
             tasks.append('dequeue')
     return tasks
 
-def measure_performance(pq_class):
-    total_time = 0
+def measure_performance(queue_type):
+    times = []
     for _ in range(100):
         tasks = generate_random_task_list()
-        pq = pq_class()
-        start_time = datetime.now()
-        for task in tasks:
-            if task == 'enqueue':
-                pq.enqueue(random.randint(1, 1000))
-            else:
-                pq.dequeue()
-        end_time = datetime.now()
-        total_time += (end_time - start_time).total_seconds()
-    return total_time
+        queue = queue_type()
+        total_time = timeit.timeit(lambda: execute_tasks(queue, tasks), number=1)
+        times.append(total_time)
+    return times
 
+def execute_tasks(queue, tasks):
+    for task in tasks:
+        if task == 0:
+            queue.enqueue(1) 
+        else:
+            queue.dequeue()
 # Measure performance of PriorityQueue
 pq_time = measure_performance(PriorityQueue)
-print("Performance of PriorityQueue:", pq_time)
+#print("Performance of PriorityQueue:", pq_time)
+print("Average performance of PriorityQueue:", sum(pq_time)/100)
 
 # Measure performance of AnotherPriorityQueue
 another_pq_time = measure_performance(AnotherPriorityQueue)
-print("Performance of AnotherPriorityQueue:", another_pq_time)
+#print("Performance of AnotherPriorityQueue:", another_pq_time)
+print("Average performance of AnotherPriorityQueue:", sum(another_pq_time)/100)
 
 
 # The AnotherPriorityQueue that we implemented is much faster because when we don't do the mergesort everytime that we insert something into our array, we instead just found the location it needed to be right away and inserted it
