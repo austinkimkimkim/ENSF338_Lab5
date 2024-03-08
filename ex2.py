@@ -126,6 +126,9 @@ print("Performance of AnotherPriorityQueue:", another_pq_time)
 print("Average performance of PriorityQueue:", sum(pq_time)/100)
 print("Average performance of AnotherPriorityQueue:", sum(another_pq_time)/100)
 
-
-# The AnotherPriorityQueue that we implemented is much faster because when we don't do the mergesort everytime that we insert something into our array, we instead just found the location it needed to be right away and inserted it
-# while in our original PriorityQueue we mergesorted every single time we added a new element which takes more time
+#5)
+# The AnotherPriorityQueue that we implemented is much faster because its enqueue operation has O(n) complexity, whereas 
+# the implementation of PriorityQueue with mergesort has an O(nlogn) enqueue since it must be sorted after each insertion. 
+# Since AnotherPriorityQueue doesn't need to call mergesort everytime that we insert a new element into the array, but instead
+# just iterates through to the location it needed to be right away and inserts it, this implementation of a priority queue 
+# is much faster.
