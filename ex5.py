@@ -120,13 +120,17 @@ def generateTests(queue):
   #Enqueue into full queue
   queue.enqueue(18)
   print('Expected is: Enqueue None')
-  #Dequeue from list 18 times
-  for j in range(18):
+  #Peek and dequeue from list 9 times
+  for j in range(9):
+    queue.peek()
+    print('Expected is: ', f'Peek {j}')
     queue.dequeue()
     print('Expected is: ', f'Dequeue {j}')
   #Enqueue for last time
   queue.enqueue(1)
   print('Expected is: Enqueue 1')
 
+print("Tests for array queue:")
 generateTests(arr)
+print("Tests for linked list queue:")
 generateTests(ll)

@@ -77,7 +77,7 @@ def main():
   arrTime = []
   linkedTime = []
 
-  for i in range(100):
+  for _ in range(100):
     tasks = generateList()
     arr = StackArr()
     list = linkedList()
