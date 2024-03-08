@@ -11,7 +11,7 @@ def main():
       self.stack.append(val)  
     def pop(self):
       if len(self.stack) == 0:
-        return
+        return None
       else:
         self.stack.pop()
   
