@@ -111,18 +111,19 @@ def measure_performance(queue_type):
 
 def execute_tasks(queue, tasks):
     for task in tasks:
-        if task == 0:
+        if task == 'enqueue':
             queue.enqueue(1) 
         else:
             queue.dequeue()
 # Measure performance of PriorityQueue
 pq_time = measure_performance(PriorityQueue)
-#print("Performance of PriorityQueue:", pq_time)
-print("Average performance of PriorityQueue:", sum(pq_time)/100)
+print("Performance of PriorityQueue:", pq_time)
 
 # Measure performance of AnotherPriorityQueue
 another_pq_time = measure_performance(AnotherPriorityQueue)
-#print("Performance of AnotherPriorityQueue:", another_pq_time)
+print("Performance of AnotherPriorityQueue:", another_pq_time)
+
+print("Average performance of PriorityQueue:", sum(pq_time)/100)
 print("Average performance of AnotherPriorityQueue:", sum(another_pq_time)/100)
 
 
