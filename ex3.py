@@ -11,12 +11,11 @@ def main():
       self.stack.append(val)  
     def pop(self):
       if len(self.stack) == 0:
-        return
+        return None
       else:
         self.stack.pop()
-    def print(self):
-      print(self.stack)
-    
+  
+  #2
   class Node:
     def __init__(self, data):
       self.data = data
@@ -41,22 +40,8 @@ def main():
         node = self.head
         self.head = node.next
         node = None
-    def print(self):
-      current = self.head
-      while(current != None):
-        print(current.data)
-        current = current.next
 
-  # stack = StackArr()
-  # stack.push(2)
-  # stack.push(3)
-  # stack.print()
-
-  # list = linkedList()
-  # list.push(3)
-  # list.push(2)
-  # list.print()
-
+  #3
   def generateList():
     tasks = []
     for _ in range(10000):
@@ -72,7 +57,8 @@ def main():
         stack.push(1)
       elif task == 'pop':
         stack.pop()
-    
+  
+  #4
 
   arrTime = []
   linkedTime = []
