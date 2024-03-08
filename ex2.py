@@ -1,5 +1,10 @@
 #Chat GPT generated
 
+import random
+import timeit
+from datetime import datetime
+
+
 class MergeSort:
     @staticmethod
     def merge(left, right):
@@ -48,7 +53,6 @@ class PriorityQueue:
 
     def dequeue(self):
         if self.is_empty():
-            print("Priority queue is empty")
             return None
         else:
             return self.queue.pop(0)  # Remove and return the first element
@@ -76,7 +80,6 @@ class AnotherPriorityQueue:
     def dequeue(self):
         """Remove and return the first element of the array."""
         if self.is_empty():
-            print("Priority queue is empty")
             return None
         else:
             return self.queue.pop(0)
@@ -87,27 +90,47 @@ class AnotherPriorityQueue:
 
     def __str__(self):
         return str(self.queue)
+    
+def generate_random_task_list(length):
+    tasks = []
+    for _ in range(length):
+        # Generate a random task based on probabilities
+        task = random.choices(['enqueue', 'dequeue'], weights=[0.7, 0.3])[0]
+        tasks.append(task)
+    return tasks
 
-# Example usage:
-pq = PriorityQueue()
-pq.enqueue(3)
-pq.enqueue(1)
-pq.enqueue(4)
-pq.enqueue(2)
+def generate_random_task_list():
+    tasks = []
+    for _ in range(1000):
+        if random.random() < 0.7:
+            tasks.append('enqueue')
+        else:
+            tasks.append('dequeue')
+    return tasks
 
-print("Priority Queue:", pq)  # Output: [1, 2, 3, 4]
+def measure_performance(pq_class):
+    total_time = 0
+    for _ in range(100):
+        tasks = generate_random_task_list()
+        pq = pq_class()
+        start_time = datetime.now()
+        for task in tasks:
+            if task == 'enqueue':
+                pq.enqueue(random.randint(1, 1000))
+            else:
+                pq.dequeue()
+        end_time = datetime.now()
+        total_time += (end_time - start_time).total_seconds()
+    return total_time
 
-print("Dequeue:", pq.dequeue())  # Output: 1
-print("Priority Queue:", pq)  # Output: [2, 3, 4]
+# Measure performance of PriorityQueue
+pq_time = measure_performance(PriorityQueue)
+print("Performance of PriorityQueue:", pq_time)
+
+# Measure performance of AnotherPriorityQueue
+another_pq_time = measure_performance(AnotherPriorityQueue)
+print("Performance of AnotherPriorityQueue:", another_pq_time)
 
 
-pq = AnotherPriorityQueue()
-pq.enqueue(3)
-pq.enqueue(1)
-pq.enqueue(4)
-pq.enqueue(2)
-
-print("Another Priority Queue:", pq)  # Output: [1, 2, 3, 4]
-
-print("Another Dequeue:", pq.dequeue())  # Output: 1
-print("Another Priority Queue:", pq)  # Output: [2, 3, 4]
+# The AnotherPriorityQueue that we implemented is much faster because when we don't do the mergesort everytime that we insert something into our array, we instead just found the location it needed to be right away and inserted it
+# while in our original PriorityQueue we mergesorted every single time we added a new element which takes more time
